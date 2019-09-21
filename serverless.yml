@@ -1,0 +1,85 @@
+service: auth-service
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableName: ${self:custom.tableName}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      # Restrict our IAM role permissions to
+      # the specific table for the stage
+      Resource:
+        - "Fn::GetAtt": [ UsersTable, Arn ]
+
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-warmup
+  - serverless-dynamodb-local
+  - serverless-pseudo-parameters
+  - serverless-offline
+
+custom:
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallback to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+  # Set the table name here so we can use it while testing locally
+  tableName: ${self:custom.stage}-users
+
+
+functions:
+  publicEndpoint:
+    handler: handler.publicEndpoint
+    events:
+      - http:
+          path: api/public
+          method: get
+          integration: lambda
+          cors: true
+  auth:
+    handler: authorizer.authorize
+  privateEndpoint:
+    handler: handler.privateEndpoint
+    events:
+      - http:
+          path: api/private
+          method: get
+          authorizer: auth
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+
+
+resources:
+  # DynamoDB
+  - ${file(resources/dynamo-table.yml)}
+  # Cognito
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
+
+

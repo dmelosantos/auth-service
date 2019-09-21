@@ -1,0 +1,70 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "Project to demonstrate the creation of accounts using serverless",
+  "scripts": {
+    "deploy": "serverless deploy --stage ${STAGE:-dev}",
+    "lint": "eslint --max-warnings=0 src test",
+    "test": "jest test/unit",
+    "e2e": "jest test/e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmelosantos/auth-service.git"
+  },
+  "keywords": [
+    "serverless",
+    "cognito",
+    "sample"
+  ],
+  "author": "Daniel Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmelosantos/auth-service/issues"
+  },
+  "homepage": "https://github.com/dmelosantos/auth-service#readme",
+  "dependencies": {
+    "aws-sdk": "^2.533.0",
+    "jest": "^24.9.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.1",
+    "request": "^2.88.0",
+    "serverless-pseudo-parameters": "^2.4.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.14.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "serverless": "^1.52.2",
+    "serverless-dynamodb-local": "^0.2.38",
+    "serverless-offline": "^5.11.0",
+    "serverless-plugin-warmup": "^4.7.0-rc.1"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": 85
+      }
+    }
+  }
+}
