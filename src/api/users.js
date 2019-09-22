@@ -11,9 +11,7 @@ const userService = require('../service/userService');
  * @return {{body: string, statusCode: number}}
  */
 const importBackup = async (event, context) => {
-  logger.debug('event');
   logger.debug(event);
-  logger.debug('context');
   logger.debug(context);
 
   // TODO add json schema to validate the input
@@ -23,12 +21,21 @@ const importBackup = async (event, context) => {
 
     const decodedJwt = jwt.decode(event.headers.Authorization);
 
-    const result = await userService.saveBackup(decodedJwt['cognito:username'], decodedJwt.email, payload);
-    console.log(result);
-    return {
-      statusCode: 200,
-      body: 'msg.backup.success',
-    };
+    try {
+      await userService.saveBackup(decodedJwt['cognito:username'], decodedJwt.email, payload);
+
+      return {
+        statusCode: 200,
+        body: 'msg.backup.success',
+      };
+    } catch (err) {
+      logger.error(err);
+      // TODO filter dynamo messages
+      return {
+        statusCode: 500,
+        body: 'error.users.save',
+      };
+    }
   }
   return {
     statusCode: 500,
@@ -42,17 +49,33 @@ const importBackup = async (event, context) => {
  * @param context
  * @return {{body: string, statusCode: number}}
  */
-const exportBackup = (event, context) => {
-  // TODO add json schema to validate the input
-
-  // TODO add dynamoose to use models
-
+const exportBackup = async (event, context) => {
   logger.debug(event);
   logger.debug(context);
-  return {
-    statusCode: 200,
-    body: 'HELLO',
-  };
+
+  const decodedJwt = jwt.decode(event.headers.Authorization);
+
+  try {
+    const result = await userService.getBackupByUserEmail(decodedJwt.email);
+    // should only return one, as the index is an attribute. but since we used query
+    const formattedResponse = result.Items[0];
+    // process to adapt to specified format
+    // remove cognitoUsername and userEmail
+    delete formattedResponse.cognitoUsername;
+    delete formattedResponse.email;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ data: formattedResponse }),
+    };
+  } catch (err) {
+    logger.error(err);
+    // TODO filter dynamo messages
+    return {
+      statusCode: 500,
+      body: 'error.users.save',
+    };
+  }
 };
 
 module.exports = {

@@ -21,4 +21,4 @@ const removeEmptyStringFromJson = ( target ) => {
 
 module.exports = {
   removeEmptyStringFromJson
-}
+};

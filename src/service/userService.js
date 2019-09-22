@@ -41,6 +41,7 @@ const saveBackup = async (cognitoUsername, userEmail, backupData) => {
 };
 
 /**
+ * Method to get the user backup from the database
  *
  * @param userEmail
  * @return {PromiseResult<DocumentClient.QueryOutput, AWSError>}
