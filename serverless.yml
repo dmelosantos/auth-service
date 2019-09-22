@@ -7,6 +7,9 @@ provider:
   # under process.env.
   environment:
     tableName: ${self:custom.tableName}
+    # this is the only thing that can't be done via Cloudformation yet, either we need an script, or manually, add it to the Parameter Store
+    COGNITO_POOL_USER_ID: ${ssm:cognitoPoolUserId~true}
+    COGNITO_USER_CLIENT_ID: ${ssm:cognitoUserClientId~true}
 
   iamRoleStatements:
     - Effect: Allow
@@ -29,7 +32,6 @@ plugins:
   - serverless-plugin-warmup
   - serverless-dynamodb-local
   - serverless-pseudo-parameters
-  - serverless-offline
 
 custom:
   dynamodb:
@@ -47,12 +49,12 @@ custom:
 
 
 functions:
-  publicEndpoint:
-    handler: handler.publicEndpoint
+  signup:
+    handler: src/api/users.signUp
     events:
       - http:
-          path: api/public
-          method: get
+          path: signup/
+          method: post
           integration: lambda
           cors: true
   auth:

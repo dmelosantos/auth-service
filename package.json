@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/dmelosantos/auth-service#readme",
   "dependencies": {
+    "amazon-cognito-identity-js": "^3.0.15",
     "aws-sdk": "^2.533.0",
     "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
@@ -46,7 +47,8 @@
     "serverless": "^1.52.2",
     "serverless-dynamodb-local": "^0.2.38",
     "serverless-offline": "^5.11.0",
-    "serverless-plugin-warmup": "^4.7.0-rc.1"
+    "serverless-plugin-warmup": "^4.7.0-rc.1",
+    "vue-cli-plugin-vuetify": "^0.6.3"
   },
   "prettier": {
     "singleQuote": true

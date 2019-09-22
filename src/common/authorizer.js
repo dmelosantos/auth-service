@@ -7,7 +7,7 @@ const logger = require('./logger');
 // refer to:        https://auth0.com/docs/tokens/id-tokens
 // For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id>
 // refer to:        http://amzn.to/2fo77UI
-const iss = 'https://<url>.com/';
+const iss = 'https://auth-service.auth.us-east-1.amazoncognito.com/';
 
 // Generate policy to allow this user on this API:
 const generatePolicy = (principalId, effect, resource) => {
