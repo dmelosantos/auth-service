@@ -55,10 +55,10 @@ functions:
     events:
       - http:
           path: backup/import
-          method: get
+          method: post
           integration: lambda
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:547936294553:userpool/us-east-1_6mUDE8Y65
+            arn: arn:aws:cognito-idp:us-east-1:547936294553:userpool/us-east-1_iGdb8rWlM
           cors:
             origins:
               - '*'
@@ -73,7 +73,7 @@ functions:
           method: get
           integration: lambda
           authorizer:
-            arn: arn:aws:cognito-idp:us-east-1:547936294553:userpool/us-east-1_6mUDE8Y65
+            arn: arn:aws:cognito-idp:us-east-1:547936294553:userpool/us-east-1_iGdb8rWlM
           cors:
             origins:
               - '*'
