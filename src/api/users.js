@@ -63,7 +63,6 @@ const exportBackup = async (event, context) => {
       body: JSON.stringify(result),
     };
   } catch (err) {
-    console.log(err)
     logger.error(err);
     // TODO filter dynamo messages
     return {

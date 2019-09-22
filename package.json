@@ -5,8 +5,7 @@
   "scripts": {
     "deploy": "serverless deploy --stage ${STAGE:-dev}",
     "lint": "eslint --max-warnings=0 src test",
-    "test": "jest test/unit",
-    "e2e": "jest test/e2e"
+    "test": "jest test/unit"
   },
   "repository": {
     "type": "git",
