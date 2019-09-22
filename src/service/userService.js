@@ -40,6 +40,25 @@ const saveBackup = async (cognitoUsername, userEmail, backupData) => {
   return dynamoDb.put(params).promise();
 };
 
+/**
+ *
+ * @param userEmail
+ * @return {PromiseResult<DocumentClient.QueryOutput, AWSError>}
+ */
+const getBackupByUserEmail = async (userEmail) => {
+  const params = {
+    TableName: process.env.tableName,
+    IndexName: 'emailIndex',
+    KeyConditionExpression: 'email = :email',
+    ExpressionAttributeValues: {
+      ':email': userEmail,
+    },
+  };
+
+  return dynamoDb.query(params).promise();
+};
+
 module.exports = {
   saveBackup,
+  getBackupByUserEmail,
 };

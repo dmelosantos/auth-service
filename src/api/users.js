@@ -11,7 +11,9 @@ const userService = require('../service/userService');
  * @return {{body: string, statusCode: number}}
  */
 const importBackup = async (event, context) => {
+  logger.debug('event');
   logger.debug(event);
+  logger.debug('context');
   logger.debug(context);
 
   // TODO add json schema to validate the input

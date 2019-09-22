@@ -45,7 +45,6 @@ custom:
   # Set the table name here so we can use it while testing locally
   tableName: users-${self:custom.stage}
 
-
 functions:
   importBackup:
     handler: src/api/users.importBackup
@@ -59,9 +58,9 @@ functions:
           cors:
             origins:
               - '*'
-            headers:
-              - Content-Type
-              - Authorization
+          headers:
+            - Content-Type
+            - Authorization
   exportBackup:
     handler: src/api/users.exportBackup
     events:
