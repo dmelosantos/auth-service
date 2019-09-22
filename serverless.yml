@@ -7,9 +7,6 @@ provider:
   # under process.env.
   environment:
     tableName: ${self:custom.tableName}
-    # this is the only thing that can't be done via Cloudformation yet, either we need an script, or manually, add it to the Parameter Store
-    COGNITO_POOL_USER_ID: ${ssm:cognitoPoolUserId~true}
-    COGNITO_USER_CLIENT_ID: ${ssm:cognitoUserClientId~true}
 
   iamRoleStatements:
     - Effect: Allow
@@ -46,7 +43,7 @@ custom:
   # commands. Or fallback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-users
+  tableName: users-${self:custom.stage}
 
 
 functions:

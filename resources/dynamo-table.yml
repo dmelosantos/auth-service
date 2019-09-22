@@ -4,14 +4,27 @@ Resources:
     Properties:
       TableName: ${self:custom.tableName}
       AttributeDefinitions:
-        - AttributeName: userId
+        - AttributeName: id
           AttributeType: S
-        - AttributeName: noteId
+        - AttributeName: cognitoUsername
+          AttributeType: S
+        - AttributeName: email
           AttributeType: S
       KeySchema:
-        - AttributeName: userId
+        - AttributeName: id
           KeyType: HASH
-        - AttributeName: noteId
-          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: cognitoUsernameIndex
+          KeySchema:
+            - AttributeName: cognitoUsername
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: emailIndex
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
       # Set the capacity to auto-scale
       BillingMode: PAY_PER_REQUEST
