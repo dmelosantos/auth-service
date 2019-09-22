@@ -73,7 +73,7 @@ const exportBackup = async (event, context) => {
     // TODO filter dynamo messages
     return {
       statusCode: 500,
-      body: 'error.users.save',
+      body: 'error.users.getBackup',
     };
   }
 };

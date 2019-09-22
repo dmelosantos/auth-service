@@ -21,7 +21,8 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ UsersTable, Arn ]
+        - arn:aws:dynamodb:*:*:table/${self:custom.tableName}
+        - arn:aws:dynamodb:*:*:table/${self:custom.tableName}/index/*
 
 
 plugins:
@@ -58,9 +59,9 @@ functions:
           cors:
             origins:
               - '*'
-          headers:
-            - Content-Type
-            - Authorization
+            headers:
+              - Content-Type
+              - Authorization
   exportBackup:
     handler: src/api/users.exportBackup
     events:
