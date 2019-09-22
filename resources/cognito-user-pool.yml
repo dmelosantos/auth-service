@@ -29,6 +29,7 @@ Resources:
         Ref: CognitoUserPool
       ExplicitAuthFlows:
         - ADMIN_NO_SRP_AUTH
+        - USER_PASSWORD_AUTH
       GenerateSecret: false
 
 # Print out the Id of the User Pool that is created

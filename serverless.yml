@@ -50,30 +50,36 @@ custom:
 
 
 functions:
-  signup:
-    handler: src/api/users.signUp
+  importBackup:
+    handler: src/api/users.importBackup
     events:
       - http:
-          path: signup/
-          method: post
-          integration: lambda
-          cors: true
-  auth:
-    handler: authorizer.authorize
-  privateEndpoint:
-    handler: src/api/users.privateEndpoint
-    events:
-      - http:
-          path: api/private
+          path: backup/import
           method: get
-          authorizer: auth
+          integration: lambda
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:547936294553:userpool/us-east-1_6mUDE8Y65
           cors:
             origins:
               - '*'
             headers:
               - Content-Type
               - Authorization
-
+  exportBackup:
+    handler: src/api/users.exportBackup
+    events:
+      - http:
+          path: backup/export
+          method: get
+          integration: lambda
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:547936294553:userpool/us-east-1_6mUDE8Y65
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
 
 resources:
   # DynamoDB
