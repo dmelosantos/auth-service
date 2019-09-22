@@ -57,18 +57,13 @@ const exportBackup = async (event, context) => {
 
   try {
     const result = await userService.getBackupByUserEmail(decodedJwt.email);
-    // should only return one, as the index is an attribute. but since we used query
-    const formattedResponse = result.Items[0];
-    // process to adapt to specified format
-    // remove cognitoUsername and userEmail
-    delete formattedResponse.cognitoUsername;
-    delete formattedResponse.email;
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ data: formattedResponse }),
+      body: JSON.stringify(result),
     };
   } catch (err) {
+    console.log(err)
     logger.error(err);
     // TODO filter dynamo messages
     return {

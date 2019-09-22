@@ -2,8 +2,6 @@ const uuid = require('uuid');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const utils = require('../common/utils');
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
 /**
  * Method with access to DynamoDB to insert the backup data
  * @param cognitoUsername retrieved from the JWT
@@ -12,6 +10,9 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
  * @return {Promise<void>}
  */
 const saveBackup = async (cognitoUsername, userEmail, backupData) => {
+  // always initialize inside so the aws-sdk-mock can fake this
+  const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
   const timestamp = new Date().toISOString();
   // DOUBT: does data.Users has multiple users with same parameters and conversations?
   // By the problem description it says "for ONE user"
@@ -47,6 +48,9 @@ const saveBackup = async (cognitoUsername, userEmail, backupData) => {
  * @return {PromiseResult<DocumentClient.QueryOutput, AWSError>}
  */
 const getBackupByUserEmail = async (userEmail) => {
+  // always initialize inside so the aws-sdk-mock can fake this
+  const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
   const params = {
     TableName: process.env.tableName,
     IndexName: 'emailIndex',
@@ -56,7 +60,23 @@ const getBackupByUserEmail = async (userEmail) => {
     },
   };
 
-  return dynamoDb.query(params).promise();
+  const result = await dynamoDb.query(params).promise();
+
+  // should only return one, as the index is an attribute. but since we used query
+  const formattedResponse = result.Items[0];
+
+  // process to adapt to specified format
+  // remove cognitoUsername and userEmail
+  delete formattedResponse.cognitoUsername;
+  delete formattedResponse.email;
+  delete formattedResponse.createdAt;
+  delete formattedResponse.updatedAt;
+  delete formattedResponse.id;
+
+  return {
+    data: (formattedResponse),
+    schemaVersion: parseInt(process.env.SCHEMA_VERSION, 10),
+  };
 };
 
 module.exports = {

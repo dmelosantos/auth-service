@@ -1,0 +1,133 @@
+{
+  "cognitoUsername": "ca57e699-fc66-4b1d-b9a7-dd5efedf960b",
+  "Conversations": [
+    {
+      "emotion_after_lvl": 0,
+      "emotion_before_id": "14",
+      "emotion_before_lvl": 50,
+      "finished_at": "2019-09-12T00:07:59.273Z",
+      "id": "69890E00334547CA8D945C097F11998F",
+      "messages": "[{\"Hi Youper\"},{\"This is an example\"}]",
+      "metadata": null,
+      "started_at": "2019-09-12T00:07:50.738Z",
+      "status": "FINISHED",
+      "title": null,
+      "topic_id": "[]",
+      "updatedAt": "2019-09-12T00:07:59.279Z"
+    }
+  ],
+  "createdAt": "2019-09-22T21:02:24.869Z",
+  "email": "danielmelos@gmail.com",
+  "id": "4704c950-dd7c-11e9-aa40-e9411db0cc22",
+  "Parameters": [
+    {
+      "id": "8F24D895BC26489C8A233D1A003A4894",
+      "key": "NG_TRANSLATE_LANG_KEY",
+      "updatedAt": "2019-09-11T21:26:20.634Z",
+      "value": "en"
+    },
+    {
+      "id": "611C70EEFD3C4021B9F1B9A5C3E26334",
+      "key": "version",
+      "updatedAt": "2019-09-11T21:26:20.801Z",
+      "value": "7.00.001"
+    },
+    {
+      "id": "598F7534F9DD4CDA8B6149B8E63F67BC",
+      "key": "userTimezone",
+      "updatedAt": "2019-08-27T20:35:43.000Z",
+      "value": "America/Los_Angeles"
+    },
+    {
+      "id": "CD735161093C4FB28C6152F2CEA141AA",
+      "key": "weeklyInsightsTracking",
+      "updatedAt": "2019-09-11T21:25:49.000Z",
+      "value": "2019-09-11T14:25:48-07:00"
+    },
+    {
+      "id": "9085830FE4B2417D8215A0E9D775C303",
+      "key": "healthKitAuthRequested",
+      "updatedAt": "2019-09-12T00:07:34.773Z",
+      "value": null
+    },
+    {
+      "id": "429E030EE16849FC8402FB4759A7B987",
+      "key": "goalsSelected",
+      "updatedAt": "2019-09-12T00:07:44.443Z",
+      "value": [
+        {
+          "$$hashKey": "object:668",
+          "name": "Be more productive",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "187905F52A2041A2BEDDE53A9B278018",
+      "key": "TotalTherapyDuration",
+      "updatedAt": "2019-09-12T00:07:59.374Z",
+      "value": 1
+    }
+  ],
+  "SessionTechnique": [
+    {
+      "conversation": "69890E00334547CA8D945C097F11998F",
+      "id": "3F43C38E08F149A2975A8878C74071C6",
+      "meta": null,
+      "techniques": [
+        "Mood Tracking"
+      ],
+      "updatedAt": "2019-09-12T00:07:59.286Z"
+    }
+  ],
+  "UnitHistory": [
+    {
+      "count": 4,
+      "id": "start_0_-_start_0_path_start",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    },
+    {
+      "count": 4,
+      "id": "onboard_-_onboard_path_start",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    },
+    {
+      "count": 4,
+      "id": "onboard_-_onboard_adapt_source_condition",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    },
+    {
+      "count": 4,
+      "id": "onboard_-_start_0_B",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    },
+    {
+      "count": 3,
+      "id": "onboard_-_start_0_orient1",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    },
+    {
+      "count": 3,
+      "id": "onboard_-_start_0_B2",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    },
+    {
+      "count": 1,
+      "id": "onboard_-_take_care_of_you",
+      "updatedAt": "2019-09-12T00:07:59.287Z"
+    }
+  ],
+  "updatedAt": "2019-09-22T21:02:24.869Z",
+  "Users": [
+    {
+      "age": 20,
+      "alias": "Nickname",
+      "email": "ieoldskk1ka@youper.co",
+      "gender": "not_informed",
+      "id": "2EAE49BB54B0492BB7814B93F03F65F1",
+      "language": "en",
+      "occupation": "not_informed",
+      "updatedAt": "2019-09-12T00:07:32.994Z"
+    }
+  ]
+}
