@@ -32,6 +32,7 @@ plugins:
   - serverless-plugin-warmup
   - serverless-dynamodb-local
   - serverless-pseudo-parameters
+  - serverless-ignore
 
 custom:
   dynamodb:
@@ -60,7 +61,7 @@ functions:
   auth:
     handler: authorizer.authorize
   privateEndpoint:
-    handler: handler.privateEndpoint
+    handler: src/api/users.privateEndpoint
     events:
       - http:
           path: api/private
@@ -71,10 +72,7 @@ functions:
               - '*'
             headers:
               - Content-Type
-              - X-Amz-Date
               - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
 
 
 resources:
